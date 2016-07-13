@@ -19,15 +19,15 @@ lots of log entries, this can help you tune your fail2ban regex.
 ## Usage
 Search the log for filter violations.
 ```
-$ ./fail2bantest.py -f /etc/fail2ban/filter/my_filter.conf -l /var/log/mysite/apache.log
+$ ./fail2ban-regex-test.py -f /etc/fail2ban/filter/my_filter.conf -l /var/log/mysite/apache.log
 ```
 
 Search the log for regex matches.
 ```
-$ ./fail2bantest.py -r '<some regex in here>' -l /var/log/mysite/apache.log
+$ ./fail2ban-regex-test.py -r '<some regex in here>' -l /var/log/mysite/apache.log
 ```
 
 Multiple files can be searched.
 ```
-$ ./fail2bantest.py -r '<some regex in here>' -l /var/log/mysite1/apache1.log /var/log/mysite2/apache2.log
+$ ./fail2ban-regex-test.py -r '<some regex in here>' -l /var/log/mysite1/apache1.log /var/log/mysite2/apache2.log
 ```
