@@ -34,11 +34,13 @@ def log_file_gen(log_file_):
 
 def search_log_file(log_files, regex):
     for log_file in log_files:
+        sys.stdout.write("\n\n-- %s\n" % log_file)
         for line in log_file_gen(log_file):
             line = line.strip()
             re_search = re.search(regex, line)
             if re_search:
-                print line
+                sys.stdout.write(line + "\n")
+                sys.stdout.flush()
 
 
 def main():
@@ -61,17 +63,20 @@ def main():
 
     if args.filter_file is not None:
         for filter_file in args.filter_file:
-            sys.stdout.write("\n%s\n" % filter_file)
+            sys.stdout.write("\n%s" % filter_file)
             sys.stdout.flush()
             for regex in filter_file_gen(filter_file):
-                sys.stdout.write("-- %s\n\n" % regex)
+                sys.stdout.write("\n\n-- %s\n\n" % regex)
                 sys.stdout.flush()
+
+                regex = regex.replace("<HOST>", ".*")
 
                 search_log_file(args.log_file, regex)
 
     if args.regex is not None:
         for regex in args.regex:
             sys.stdout.write("\n%s\n" % regex)
+            regex = regex.replace("<HOST>", ".*")
 
             search_log_file(args.log_file, regex)
 
